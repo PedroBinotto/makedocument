@@ -1,0 +1,55 @@
+\documentclass[12pt]{article}
+\usepackage[portuguese, english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, left=3cm, right=2cm, top=3cm, bottom=2cm]{geometry}
+\usepackage{authblk}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{subcaption}
+\usepackage{verbatimbox}
+
+\addto\captionsportuguese{\renewcommand*\contentsname{Sumário}}
+\setcounter{secnumdepth}{0}
+\onehalfspacing
+
+\title{Título de Artigo}
+\author[1]{Pedro Santi Binotto [20200634]\thanks{\texttt{pedro.binotto@grad.ufsc.br}}}
+\date{\today}
+\affil[1]{Departamento de Informática e Estatística, Universidade Federal de Santa Catarina}
+
+\begin{document}
+\begin{titlepage}
+\selectlanguage{portuguese} 
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+    Resumo em Português
+\end{abstract}
+
+\selectlanguage{english} 
+\begin{abstract}
+    Abstract in English
+\end{abstract}
+\end{titlepage}
+
+\selectlanguage{portuguese} 
+
+\newpage
+\tableofcontents
+
+\newpage
+\section{Nome de secção}
+\subsection{Subsecção}
+\paragraph{}
+
+Conteúdo de parágrafo
+
+\newpage
+\section{Referências Bibliográficas}
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
+
