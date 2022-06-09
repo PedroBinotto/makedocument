@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+
+#     TODO: 
+#           [ ] Parse CLASS argument
+#           [ ] Add "template" parameter
+#           [-t: template]       Specifies document template within class
+
+#               [article]
+#                   abnt         ABNT academic document format {...}
+#                   ...
+#
+#               [readme]
+#                   type1        {...}
+#                   type2
+#                   type3
+
+PROGNAME=$(basename $0);
+MAKEDOCUMENT_DIR=$(dirname $(realpath "$0"))
+DOCUMENT_CLASSES=("article" "readme")
+
+printHelp() {
+    cat << "EOF"
+    USAGE: ${PROGNAME} [arguments] 
+
+    Arguments: 
+
+    [-c: class]      [required]   Specifies document type
+         article                  LaTeX template and bibliography file for academic paper
+         readme                   Markdown template for technical project documentation
+
+    [-l: location]   [required]   Specifies target directory location
+EOF
+}
+
+checkForInvalidInput() {
+    if [[ ! " ${DOCUMENT_CLASSES[*]} " =~ " ${CLASS} " ]]; then
+        return 0
+    fi
+    if ! [[ -d "$TARGET_DIR" ]] ; then
+        return 0
+    fi
+    return 1
+}
+
+
+latexMakedocument() {
+    TEX_DIR=$TARGET_DIR/latex
+    if ! [[ -d "$TEX_DIR" ]] ; then
+        mkdir $TARGET_DIR/latex
+    fi
+
+    cp $MAKEDOCUMENT_DIR/new-article/templates/article.tex $TEX_DIR/article.tex
+    ln -s $MAKEDOCUMENT_DIR/new-article/bib/references.bib $TEX_DIR/references.bib
+}
+
+# END OF UTILS
+# ACTUAL CODE "STARTS" HERE
+
+if [ $# -eq 0 ] ; then
+    printHelp
+    exit 1
+fi
+
+while getopts "c:l:h" o; do case "${o}" in
+    c) CLASS=${OPTARG} ;;
+    l) TARGET_DIR=${OPTARG} ;;
+    h) printHelp && exit 0;;
+    *) printf "Invalid option: -%s\\n" "$OPTARG" && exit 1 ;;
+esac done
+
+checkForInvalidInput && exit 1
+latexMakedocument
+
