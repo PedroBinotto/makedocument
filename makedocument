@@ -16,11 +16,16 @@
 
 PROGNAME=$(basename $0);
 MAKEDOCUMENT_DIR=$(dirname $(realpath "$0"))
-DOCUMENT_CLASSES=("article" "readme")
+MODELS=($( ls $MAKEDOCUMENT_DIR/model ))
+declare -a DOCUMENT_CLASSES=()
+
+for MODEL in "${MODELS[@]}"; do
+    DOCUMENT_CLASSES+=("$MODEL")
+done
 
 printHelp() {
     cat << "EOF"
-    USAGE: ${PROGNAME} [arguments] 
+    USAGE: makedocument [arguments] 
 
     Arguments: 
 
@@ -49,8 +54,8 @@ latexMakedocument() {
         mkdir $TARGET_DIR/latex
     fi
 
-    cp $MAKEDOCUMENT_DIR/new-article/templates/article.tex $TEX_DIR/article.tex
-    ln -s $MAKEDOCUMENT_DIR/new-article/bib/references.bib $TEX_DIR/references.bib
+    cp $MAKEDOCUMENT_DIR/model/article/templates/article.tex $TEX_DIR/article.tex
+    ln -s $MAKEDOCUMENT_DIR/model/article/bib/references.bib $TEX_DIR/references.bib
 }
 
 # END OF UTILS
