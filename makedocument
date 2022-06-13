@@ -1,19 +1,5 @@
 #!/usr/bin/env bash
 
-#     TODO: 
-#           [ ] Parse CLASS argument
-#           [ ] Add "template" parameter
-#           [-t: template]       Specifies document template within class
-
-#               [article]
-#                   abnt         ABNT academic document format {...}
-#                   ...
-#
-#               [readme]
-#                   type1        {...}
-#                   type2
-#                   type3
-
 PROGNAME=$(basename $0);
 MAKEDOCUMENT_DIR=$(dirname $(realpath "$0"))
 MODELS=($( ls $MAKEDOCUMENT_DIR/model ))
@@ -30,7 +16,7 @@ printHelp() {
     Arguments: 
 
     [-c: class]      [required]   Specifies document type
-         article                  LaTeX template and bibliography file for academic paper
+         article                  LaTeX template and bibliography file for academic papers
          readme                   Markdown template for technical project documentation
 
     [-l: location]   [required]   Specifies target directory location
@@ -38,10 +24,7 @@ EOF
 }
 
 checkForInvalidInput() {
-    if [[ ! " ${DOCUMENT_CLASSES[*]} " =~ " ${CLASS} " ]]; then
-        return 0
-    fi
-    if ! [[ -d "$TARGET_DIR" ]] ; then
+    if [[ ( ! " ${DOCUMENT_CLASSES[*]} " =~ " ${CLASS} " ) && ( -d "$TARGET_DIR" ) ]]; then
         return 0
     fi
     return 1
@@ -54,8 +37,17 @@ latexMakedocument() {
         mkdir $TARGET_DIR/latex
     fi
 
-    cp $MAKEDOCUMENT_DIR/model/article/templates/article.tex $TEX_DIR/article.tex
-    ln -s $MAKEDOCUMENT_DIR/model/article/bib/references.bib $TEX_DIR/references.bib
+    cp $MAKEDOCUMENT_DIR/model/$CLASS/templates/$CLASS.tex $TEX_DIR/$CLASS.tex
+    ln -s $MAKEDOCUMENT_DIR/references/bib/references.bib $TEX_DIR/references.bib
+}
+
+markdownMakedocument() {
+    DOC_DIR=$TARGET_DIR/docs
+    if ! [[ -d "$DOC_DIR" ]] ; then
+        mkdir $TARGET_DIR/docs
+    fi
+
+    cp $MAKEDOCUMENT_DIR/model/$CLASS/templates/$CLASS.md $DOC_DIR/$CLASS.md
 }
 
 # END OF UTILS
@@ -74,5 +66,10 @@ while getopts "c:l:h" o; do case "${o}" in
 esac done
 
 checkForInvalidInput && exit 1
-latexMakedocument
+
+if [ "$CLASS" == "article" ] ; then
+    latexMakedocument
+elif [ "$CLASS" == "readme" ] ; then
+    markdownMakedocument
+fi
 
