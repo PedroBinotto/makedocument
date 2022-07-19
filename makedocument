@@ -17,6 +17,7 @@ printHelp() {
 
     [-c: class]      [required]   Specifies document type
          article                  LaTeX template and bibliography file for academic papers
+         presentation             LaTeX Beamer template for academic presentations
          readme                   Markdown template for technical project documentation
 
     [-l: location]   [required]   Specifies target directory location
@@ -38,6 +39,7 @@ latexMakedocument() {
     fi
 
     cp $MAKEDOCUMENT_DIR/model/$CLASS/templates/$CLASS.tex $TEX_DIR/$CLASS.tex
+    cp $MAKEDOCUMENT_DIR/model/$CLASS/gitignore $TEX_DIR/.gitignore
     ln -s $MAKEDOCUMENT_DIR/references/bib/references.bib $TEX_DIR/references.bib
 }
 
@@ -67,7 +69,7 @@ esac done
 
 checkForInvalidInput && exit 1
 
-if [ "$CLASS" == "article" ] ; then
+if [[ "$CLASS" == "article" || "$CLASS" == "presentation" ]] ; then
     latexMakedocument
 elif [ "$CLASS" == "readme" ] ; then
     markdownMakedocument
