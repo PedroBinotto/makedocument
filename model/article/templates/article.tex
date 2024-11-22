@@ -1,22 +1,52 @@
 \documentclass[12pt]{article}
+
 \usepackage[portuguese, english]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[a4paper, left=3cm, right=2cm, top=3cm, bottom=2cm]{geometry}
 \usepackage{authblk}
+\usepackage{cite}
 \usepackage{fontspec}
+\usepackage[toc]{glossaries}
 \usepackage{graphicx}
+\usepackage{hyperref}
 \usepackage{setspace}
 \usepackage{subcaption}
 \usepackage{verbatimbox}
+\usepackage[dvipsnames]{xcolor}
 
 \addto\captionsportuguese{\renewcommand*\contentsname{Sumário}}
-\setcounter{secnumdepth}{0}
-\onehalfspacing
+
+\newcommand\myshade{85}
+\newcommand{\pprime}{\ensuremath{^{\prime}}}
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+\providecommand{\keywords}[1]{%
+  \small
+  \textbf{\textit{\iflanguage{english}{Keywords}{Palavras-chave}---}} #1%
+}
+
+\hypersetup{
+    pdftitle   = {Título de Artigo},
+    pdfauthor  = {Pedro Santi Binotto},
+    pdfsubject = {Resumo em Português},
+    linkcolor  = black,
+    citecolor  = black,
+    urlcolor   = black,
+    colorlinks = true,
+    filecolor  = black,
+    linktoc    = page
+}%
+
+% \newglossaryentry{gls} {
+%   name={GLS},
+%   description={Glossary entry}
+% }
 
 \title{Título de Artigo}
 \author[1]{Pedro Santi Binotto [20200634]\thanks{\texttt{pedro.binotto@grad.ufsc.br}}}
 \date{\today}
 \affil[1]{Departamento de Informática e Estatística, Universidade Federal de Santa Catarina}
+
+\makeglossaries
 
 \begin{document}
 \begin{titlepage}
@@ -32,14 +62,17 @@
 \begin{abstract}
     Abstract in English
 \end{abstract}
-\end{titlepage}
 
 \selectlanguage{portuguese} 
 
-\newpage
+\keywords{bla,bla, bla}
+
+\end{titlepage}
+
 \tableofcontents
 
-\newpage
+\printglossary[title=Glossário, toctitle=Glossário]
+
 \section{Nome de secção}
 \subsection{Subsecção}
 \paragraph{}
@@ -48,7 +81,7 @@ Conteúdo de parágrafo
 
 \newpage
 \section{Referências Bibliográficas}
-\bibliographystyle{plain}
+\bibliographystyle{apalike}
 \bibliography{references}
 
 \end{document}
