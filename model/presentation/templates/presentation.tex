@@ -1,9 +1,14 @@
-\documentclass{beamer}
+\documentclass[t]{beamer}
 \usepackage[portuguese]{babel}
 \usepackage{biblatex}
-\addbibresource{references.bib}
 
 \usetheme{metropolis}           % Use metropolis theme
+
+\setbeamerfont{bibliography item}{size=\tiny}
+\setbeamerfont{bibliography entry author}{size=\tiny}
+\setbeamerfont{bibliography entry title}{size=\tiny}
+\setbeamerfont{bibliography entry location}{size=\tiny}
+\setbeamerfont{bibliography entry note}{size=\tiny}
 
 \renewcommand{\footfullcite}[2][]{%
     \footnote{\citeauthor{#2} (\citeyear{#2}): \emph{\citetitle{#2}}.}
@@ -34,6 +39,10 @@
         \begin{block}{Título de Bloco}
             Conteúdo de painel
         \end{block}
+    }
+
+    \frame{\frametitle{Bibliografia}
+      \printbibliography[heading=none]
     }
 
 \end{document}
