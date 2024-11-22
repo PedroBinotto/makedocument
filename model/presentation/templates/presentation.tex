@@ -1,15 +1,22 @@
 \documentclass{beamer}
 \usepackage[portuguese]{babel}
+\usepackage{biblatex}
+\addbibresource{references.bib}
+
 \usetheme{metropolis}           % Use metropolis theme
+
+\renewcommand{\footfullcite}[2][]{%
+    \footnote{\citeauthor{#2} (\citeyear{#2}): \emph{\citetitle{#2}}.}
+}
 
 \title{Título da Apresentação}
 \subtitle{Subtítulo}
 \author[Short Name (U ABC)]{%
     \texorpdfstring{%
         \begin{columns}
-            \column{.2\linewidth}
+            \column{.3\linewidth}
             \centering
-            Pedro Santi Binotto        \\ {[}20200634{]}
+            Pedro Santi Binotto \\ {[}20200634{]}
         \end{columns}
     }
     { Pedro Santi Binotto }
