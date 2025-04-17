@@ -1,31 +1,35 @@
 \documentclass[12pt]{article}
 
-\usepackage[portuguese, english]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[a4paper, left=3cm, right=2cm, top=3cm, bottom=2cm]{geometry}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[toc]{glossaries}
 \usepackage{authblk}
 \usepackage{cite}
 \usepackage{fontspec}
-\usepackage[toc]{glossaries}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage{relsize}
 \usepackage{setspace}
 \usepackage{subcaption}
 \usepackage{verbatimbox}
-\usepackage[dvipsnames]{xcolor}
-
-\addto\captionsportuguese{\renewcommand*\contentsname{Sumário}}
+\usepackage[english, portuguese]{babel}
+    \addto\captionsportuguese{\renewcommand*\bibname{Referências}}
+    \addto\captionsportuguese{\renewcommand*\contentsname{Sumário}}
 
 \newcommand\myshade{85}
 \newcommand{\pprime}{\ensuremath{^{\prime}}}
 \newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+\renewcommand\Authsep{, }
+\renewcommand\Authand{, }
+\renewcommand\Authands{, e }
 \providecommand{\keywords}[1]{%
   \small
   \textbf{\textit{\iflanguage{english}{Keywords}{Palavras-chave} ---}} #1%
 }
 
 \hypersetup{
-    pdftitle   = {Título de Artigo},
+    pdftitle   = {Título de Artigo, Subtítulo de Artigo},
     pdfauthor  = {Pedro Santi Binotto},
     pdfsubject = {Resumo em Português},
     linkcolor  = black,
@@ -41,7 +45,7 @@
 %   description={Glossary entry}
 % }
 
-\title{Título de Artigo}
+\title{Título de Artigo \\ [0.2em]\smaller{}Subtítulo de Artigo}
 \author[1]{Pedro Santi Binotto [20200634]\thanks{\texttt{pedro.binotto@grad.ufsc.br}}}
 \date{\today}
 \affil[1]{Departamento de Informática e Estatística, Universidade Federal de Santa Catarina}
