@@ -1,5 +1,14 @@
 *.aux
-*.log
-*.blg
 *.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.glg
+*.glo
+*.gls
+*.ist
+*.log
+*.out
 *.pdf
+*.synctex.gz
+*.toc
